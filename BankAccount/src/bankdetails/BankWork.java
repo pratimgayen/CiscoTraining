@@ -1,5 +1,6 @@
 package bankdetails;
 import java.io.*;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -35,7 +36,7 @@ class BankWork {
 		double amount = 0;
 		boolean permit;
 		permit = true;
-
+		Random random=new Random();
 		if (totRec > max_limit) {
 			System.out
 					.println("\n\n\nSorry we cannot admit you in our bank...\n\n\n");
@@ -47,12 +48,11 @@ class BankWork {
 			totRec++; // Incrementing Total Record
 			System.out.println("\n\n\n=====RECORDING NEW ENTRY=====");
 			try {
-				accNo[totRec] = totRec; // Created AutoNumber to accNo so no
-										// invalid id occurs
-				System.out.println("Account Number :  ");
+				
+				System.out.println("Account Number :  "+random.nextInt(100));
 
 				Scanner scanner=new Scanner(System.in);
-				accountNumber=totRec;
+				
 				System.out.print("Enter Name :  ");
 				
 				accountHolder = scanner.nextLine();
@@ -79,25 +79,26 @@ class BankWork {
 	public void display() {
 		int accountNumber= 0;
 		boolean valid = true;
-
+		SaveAndRetriveBalance sarb=new SaveAndRetriveBalance();
+		
 		System.out.println("\n\n=====DISPLAYING DETAILS OF CUSTOMER=====\n");
 		try {
 			Scanner scanner=new Scanner(System.in);
 			System.out.print("Enter Account number : ");
 			
 			accountNumber = scanner.nextInt();
-			
-			if (accountNumber < min_limit || accountNumber > totRec) // To check whether accNo is
+			boolean checking=sarb.check(accountNumber);
+			if (checking == false) // To check whether accNo is
 													// valid or Not
 			{
 				System.out.println("\n\n\nInvalid Account Number \n\n");
 				valid = false;
 			}
 
-			if (valid == true) {
-				System.out.println("\n\nAccount Number : " + accNo[accountNumber]);
+			if (checking == true) {
+				
+				System.out.println("\n\nAccount Number : " + accountNumber);
 				System.out.println("Name : " + name[accountNumber]);
-				System.out.println("Account Type : " + accType[accountNumber]);
 				System.out.println("Balance Amount : " + balAmt[accountNumber]
 						+ "\n\n\n");
 			}

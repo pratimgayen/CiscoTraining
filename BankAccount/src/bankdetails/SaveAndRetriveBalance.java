@@ -11,6 +11,7 @@ import java.util.StringTokenizer;
 
 public class SaveAndRetriveBalance {
 	 public SaveAndRetriveBalance(){
+		 
 	 }
 	 
 	HashMap<String,String> hm;
@@ -19,8 +20,9 @@ public class SaveAndRetriveBalance {
         String stringaccountnumber=String.valueOf(accountnumber);
         String stringbalance=String.valueOf(balance);
         hm.put(stringaccountnumber,stringbalance);
-        
+        readfile(hm);
         writefile(hm);
+        
 
     }
     public double depositMoney(int accountNumber){
@@ -68,7 +70,10 @@ public void writefile(HashMap<String,String> map){
         pw.flush();
         pw.close();
         fos.close();
-    }catch(Exception e){}
+    }
+    catch(Exception e){
+    	
+    }
 }
 public void readfile(HashMap<String,String> map){
     //read from file 
@@ -93,13 +98,14 @@ public void readfile(HashMap<String,String> map){
 
         //print All data in MAP
         for(Map.Entry<String,String> m :mapInFile.entrySet()){
+        	
             System.out.println(m.getKey()+" : "+m.getValue());
         }
     }catch(Exception e){}
   }
 
 public static void main(String args[]){
-        
+        SaveAndRetriveBalance sarb=new SaveAndRetriveBalance(1, 500.50);
 
 }
 }
